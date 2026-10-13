@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-heading: 'DM Serif Display', Georgia, serif;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Surfaces & Canvas */
+  --bg-page: #FAF6EF;
+  --bg-alt: #E6DCCD;
+  --bg-dark: #243B34;
+  --surface-card: #FFFFFF;
+
+  /* Brand & Text */
+  --primary-pine: #2F5D50;
+  --accent-terracotta: #E07A3F;
+  --accent-gold: #F2B134;
+  --text-body: #2B2622;
+  --text-muted: #6B6258;
+  --border-hairline: #E6DCCD;
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-body);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: 0.01em; /* Open, comfortable letter spacing */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Large Main Headlines ONLY (H1, H2 section titles 32px and above) */
+  h1, h2, h1.hero-title, h2.section-title, .hero-headline {
+    font-family: var(--font-heading);
+    font-weight: 400; /* DM Serif Display regular 400 */
+    letter-spacing: 0;
+    line-height: 1.25;
+  }
+
+  /* Card Headers, FAQ Questions, Accordion Titles (Clean Sans-Serif) */
+  h3, h4, h5, h6, .card-title, .faq-question {
+    font-family: var(--font-body) !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    color: #1A1F26;
+  }
+
+  /* Body & UI elements: Strictly Plus Jakarta Sans */
+  p, span, div, input, select, textarea, td, th {
+    font-family: var(--font-body);
+  }
+
+  /* Buttons, Nav Links, Labels */
+  button, .btn, label, nav a, .font-label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  /* Monospace Rules: strictly reserved for Room Codes (A-101) & Receipt IDs (RCP-YYYYMM-XXXX) */
+  code, .font-mono, .data-mono, .code-receipt, .code-room {
+    font-family: var(--font-mono);
+    letter-spacing: 0.03em;
+  }
+}
+
+@layer components {
+  /* Cards: #FFFFFF with #E6DCCD border, #2B2622 title, #6B6258 details */
+  .card-ledger, .card-custom {
+    @apply bg-white rounded-2xl border border-[#E6DCCD] shadow-card hover:shadow-card-hover transition-all duration-300;
+  }
+
+  /* Dark card */
+  .card-dark {
+    @apply bg-[#243B34] text-[#FAF6EF] rounded-2xl border border-[#2F5D50] shadow-pine;
+  }
+
+  /* Glass card */
+  .card-glass {
+    @apply bg-white/90 backdrop-blur-md border border-[#E6DCCD] shadow-card rounded-2xl transition-all duration-300;
+  }
+
+  /* Primary Terracotta Button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-xl font-bold text-white bg-[#E07A3F] hover:bg-[#C8642D] active:scale-[0.98] shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+    font-family: var(--font-body);
+  }
+
+  /* Hero Gold Button */
+  .btn-hero {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-bold text-[#2B2622] bg-[#F2B134] hover:bg-[#E0A020] active:scale-[0.98] shadow-md transition-all duration-200;
+    font-family: var(--font-body);
+  }
+
+  /* Secondary Button */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-xl font-bold text-[#2F5D50] bg-transparent border-2 border-[#2F5D50] hover:bg-[#2F5D50] hover:text-white active:scale-[0.98] transition-all duration-200 disabled:opacity-50;
+    font-family: var(--font-body);
+  }
+
+  /* Secondary Light Button */
+  .btn-secondary-light {
+    @apply inline-flex items-center justify-center px-5 py-2.5 rounded-xl font-bold text-[#FAF6EF] bg-transparent border-2 border-[#FAF6EF] hover:bg-[#FAF6EF] hover:text-[#2F5D50] active:scale-[0.98] transition-all duration-200;
+    font-family: var(--font-body);
+  }
+
+  /* Ghost Button */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-bold text-[#6B6258] hover:text-[#E07A3F] hover:bg-[#E6DCCD]/40 transition-all duration-200;
+    font-family: var(--font-body);
+  }
+
+  /* Clean form inputs */
+  .input-field {
+    @apply w-full px-4 py-2.5 rounded-xl border border-[#E6DCCD] bg-white text-[#2B2622] placeholder-[#6B6258]/60 text-sm focus:outline-none focus:ring-2 focus:ring-[#E07A3F]/25 focus:border-[#E07A3F] transition-all duration-200;
+    font-family: var(--font-body);
+  }
+
+  /* Status Badges - Soft Tinted Badges */
+  /* Available bed: text #1F6B4A on #DDEFE5 */
+  .badge-available, .badge-success {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#DDEFE5] text-[#1F6B4A] border border-[#BFE0CE];
+  }
+
+  /* Booked/occupied bed: text #9A3B2E on #F6DFDA */
+  .badge-booked, .badge-occupied, .badge-danger {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#F6DFDA] text-[#9A3B2E] border border-[#ECC2BA];
+  }
+
+  /* Pending request: text #8A5A00 on #FBEBC8 */
+  .badge-pending, .badge-warning {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#FBEBC8] text-[#8A5A00] border border-[#F6D792];
+  }
+
+  .badge-info {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#E8EDF2] text-[#2F5D50] border border-[#C1D7C9];
+  }
+
+  .badge-brass {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#FBEBC8] text-[#8A5A00] border border-[#F6D792];
+  }
+
+  /* Typography Helper Classes */
+  .text-secondary {
+    color: #6B6258;
+    font-size: 14px;
+    font-family: var(--font-body);
+  }
+
+  .text-heading {
+    color: #2B2622;
+    font-family: var(--font-heading);
+    font-weight: 400;
+    letter-spacing: 0px;
+  }
+
+  /* Mono Data Labels strictly for codes and IDs */
+  .data-mono {
+    @apply font-mono text-xs tracking-wide text-[#6B6258];
+    font-family: var(--font-mono);
+  }
+
+  /* Shimmer Loader */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      #E6DCCD 0%,
+      #FAF6EF 50%,
+      #E6DCCD 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+/* Keyframe animations */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #E6DCCD;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6B6258;
+}
